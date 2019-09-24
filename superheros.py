@@ -1,15 +1,20 @@
+import random
+
 class Ability:
 
-	def __init__(self, max_damage)
+	def __init__(self, name , max_damage):
+		self.name = name
 		self.max_damage = max_damage
 
-	def attack():
-		pass
+	def attack(self):
+		attack_value = random.randint(0, self.max_damage)
+		return attack_value 
+
 
 
 class Armor:
 
-	def __init__(self, name, max_block)
+	def __init__(self, name, max_block):
 		self.name = name
 		self.max_block = max_block
 
@@ -25,3 +30,24 @@ class Hero:
 
 	def add_ability(Ability):
 		pass
+
+	def attack():
+		pass
+
+	def defend(incoming_damage):
+		pass
+
+	def take_damage(damage):
+		pass
+
+	def is_alive():
+		pass
+
+	def fight(opponent):
+		pass
+
+
+if __name__ == "__main__":
+	ability  = Ability("Debugging Ability", 20)
+	print(ability.name)
+	print(ability.attack())
