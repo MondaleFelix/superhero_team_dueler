@@ -32,8 +32,8 @@ class Hero:
 		self.current_health = starting_health
 
 
-	def add_ability(Ability):
-		pass
+	def add_ability(self, ability):
+		self.abilities.append(ability)
 
 	def attack():
 		pass
@@ -52,6 +52,7 @@ class Hero:
 
 
 if __name__ == "__main__":
-    my_hero = Hero("Grace Hopper", 200)
-    print(my_hero.name)
-    print(my_hero.current_health)
+    ability = Ability("Great Debugging", 50)
+    hero = Hero("Grace Hopper", 200)
+    hero.add_ability(ability)
+    print(hero.abilities)
