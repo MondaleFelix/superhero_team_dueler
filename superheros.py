@@ -7,7 +7,7 @@ class Team:
 		self.team_members = []
 
 	def add_hero(self, hero):
-		pass
+		self.team_members.append(hero)
 
 	def remove_hero(self, fired_hero):
 		for hero in self.team_members:
