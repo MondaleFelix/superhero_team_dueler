@@ -24,9 +24,13 @@ class Armor:
 
 class Hero:
 
-	def __init__(name, starting_health):
+	def __init__(self, name, starting_health = 100):
 		self.name = name
-		self.starting_health = 100
+		self.starting_health = starting_health
+		self.abilities = []
+		self.armors = []
+		self.current_health = starting_health
+
 
 	def add_ability(Ability):
 		pass
@@ -48,6 +52,6 @@ class Hero:
 
 
 if __name__ == "__main__":
-	ability  = Ability("Debugging Ability", 20)
-	print(ability.name)
-	print(ability.attack())
+    my_hero = Hero("Grace Hopper", 200)
+    print(my_hero.name)
+    print(my_hero.current_health)
