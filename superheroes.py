@@ -2,7 +2,7 @@ import random
 
 
 class Team:
-	def __init__(self, name)
+	def __init__(self, name):
 		self.name = name
 		self.team_members = []
 
@@ -23,9 +23,6 @@ class Team:
 
 
 # class Weapon will inherit from class Ability
-class Weapon(Ability):
-	def attack(self):
-		return random.randint(self.max_damage/2, self.max_damage)
 
 class Ability:
 
@@ -37,6 +34,11 @@ class Ability:
 		attack_value = random.randint(0, self.max_damage)
 		return attack_value 
 
+
+
+class Weapon(Ability):
+	def attack(self):
+		return random.randint(self.max_damage/2, self.max_damage)
 
 
 class Armor:
