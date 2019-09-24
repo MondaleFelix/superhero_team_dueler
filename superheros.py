@@ -1,5 +1,32 @@
 import random
 
+
+class Team:
+	def __init__(self, name)
+		self.name = name
+		self.team_members = []
+
+	def add_hero(self, hero):
+		pass
+
+	def remove_hero(self, fired_hero):
+		for hero in self.team_members:
+			if hero == fired_hero:
+				self.team_members.pop(index(hero))
+
+	def view_all_heros(self):
+		for hero in self.team_members:
+			print(hero)
+
+
+
+
+
+# class Weapon will inherit from class Ability
+class Weapon(Ability):
+	def attack(self):
+		return random.randint(self.max_damage/2, self.max_damage)
+
 class Ability:
 
 	def __init__(self, name , max_damage):
