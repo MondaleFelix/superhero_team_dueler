@@ -18,9 +18,9 @@ class Armor:
 		self.name = name
 		self.max_block = max_block
 
-	def block():
-		pass
-
+	def block(self):
+		block_value = random.randint(0, self.max_block)
+		return block_value
 
 class Hero:
 
