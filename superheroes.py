@@ -28,7 +28,17 @@ class Hero:
 		self.abilities = []
 		self.armors = []
 		self.current_health = starting_health
+		self.deaths = 0
+		self.kills = 0
 
+	def add_kills(self, num_kills)
+		self.kills += num_kills
+
+
+	def add_deaths(self, num_deaths)
+		self.deaths += num_deaths
+
+		
 
 	def add_ability(self, ability):
 		self.abilities.append(ability)
@@ -61,9 +71,13 @@ class Hero:
 
 		if self.is_alive():
 			print(self.name + " won")
+			self.add_kills(1)
+			opponent.add_deaths(1)
 		else:
 			print(opponent.name + " won")
-
+			self.add_deaths(1)
+			opponent.add_kills(1)
+			
 # class Weapon will inherit from class Ability
 class Weapon(Ability):
 	def attack(self):
@@ -83,22 +97,10 @@ class Team:
 		for hero in self.heroes:
 			self.heroes.remove(hero)
 		return 0
-
-
-		# for hero in self.heroes:
-		# 	if hero.name == fired_hero:
-		# 		self.heroes.pop(self.heroes.index(hero))		
-		# 	else:
-		# 		return 0
+		
 
 	def view_all_heroes(self):
 		for hero in self.heroes:
 			print(hero.name)			
 
 if __name__ == "__main__":
-	team = Team("One")
-	jodie = Hero("Jodie Foster")
-	team.add_hero(jodie)
-	athena = Hero("Athena")
-	team.add_hero(athena)
-	team.view_all_heroes()
