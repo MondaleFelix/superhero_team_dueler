@@ -77,7 +77,7 @@ class Hero:
 			print(opponent.name + " won")
 			self.add_deaths(1)
 			opponent.add_kills(1)
-			
+
 # class Weapon will inherit from class Ability
 class Weapon(Ability):
 	def attack(self):
@@ -101,6 +101,31 @@ class Team:
 
 	def view_all_heroes(self):
 		for hero in self.heroes:
-			print(hero.name)			
+			print(hero.name)		
+
+	def attack(self, other_team):
+	    ''' Battle each team against each other.'''
+		our_random_hero = self.heros[random.randint(0, len(self.heroes))]	    
+		other_teams_hero = other_team[random.randint(0, len(other_team.heroes))]
+
+		while =
+
+
+	    # TODO: Randomly select a living hero from each team and have
+	    # them fight until one or both teams have no surviving heroes.
+	    # Hint: Use the fight method in the Hero class.
+	    pass
+
+	def revive_heroes(self, health=100):
+	    ''' Reset all heroes health to starting_health'''
+	    for hero in self.heroes:
+	    	hero.current_health = hero.starting_health
+	    # TODO: This method should reset all heroes health to their
+	    # original starting value.
+
+	def stats(self):
+	    '''Print team statistics'''
+	    for hero in self.heroes:
+	    	print(hero.name + "has a KD of " + hero.kills + "/" + hero.deaths)
 
 if __name__ == "__main__":
