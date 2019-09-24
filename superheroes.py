@@ -1,29 +1,5 @@
 import random
 
-
-class Team:
-	def __init__(self, name):
-		self.name = name
-		self.team_members = []
-
-	def add_hero(self, hero):
-		self.team_members.append(hero)
-
-	def remove_hero(self, fired_hero):
-		for hero in self.team_members:
-			if hero == fired_hero:
-				self.team_members.pop(index(hero))
-
-	def view_all_heros(self):
-		for hero in self.team_members:
-			print(hero)
-
-
-
-
-
-# class Weapon will inherit from class Ability
-
 class Ability:
 
 	def __init__(self, name , max_damage):
@@ -33,13 +9,6 @@ class Ability:
 	def attack(self):
 		attack_value = random.randint(0, self.max_damage)
 		return attack_value 
-
-
-
-class Weapon(Ability):
-	def attack(self):
-		return random.randint(self.max_damage/2, self.max_damage)
-
 
 class Armor:
 
@@ -95,17 +64,36 @@ class Hero:
 		else:
 			print(opponent.name + " won")
 
+# class Weapon will inherit from class Ability
+class Weapon(Ability):
+	def attack(self):
+		return random.randint(self.max_damage // 2, self.max_damage)			
+
+
+class Team:
+
+	def __init__(self, name):
+		self.name = name
+		self.heroes = []
+
+	def add_hero(self, hero):
+		self.heroes.append(hero)
+
+	def remove_hero(self, fired_hero):
+		for hero in self.heroes:
+			if hero.name == fired_hero:
+				self.heroes.pop(self.heroes.index(hero))		
+			else:
+				return 0
+
+	def view_all_heroes(self):
+		for hero in self.heroes:
+			print(hero.name)			
+
 if __name__ == "__main__":
-    # If you run this file from the terminal
-    # this block of code is executed.
-    hero1 = Hero("Wonder Woman")
-    hero2 = Hero("Dumbledore")
-    ability1 = Ability("Super Speed", 300)
-    ability2 = Ability("Super Eyes", 130)
-    ability3 = Ability("Wizard Wand", 80)
-    ability4 = Ability("Wizard Beard", 20)
-    hero1.add_ability(ability1)
-    hero1.add_ability(ability2)
-    hero2.add_ability(ability3)
-    hero2.add_ability(ability4)
-    hero1.fight(hero2)
+	team = Team("One")
+	jodie = Hero("Jodie Foster")
+	team.add_hero(jodie)
+	athena = Hero("Athena")
+	team.add_hero(athena)
+	team.view_all_heroes()
