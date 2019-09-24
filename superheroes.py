@@ -81,10 +81,15 @@ class Team:
 
 	def remove_hero(self, fired_hero):
 		for hero in self.heroes:
-			if hero.name == fired_hero:
-				self.heroes.pop(self.heroes.index(hero))		
-			else:
-				return 0
+			self.heroes.remove(hero)
+		return 0
+
+
+		# for hero in self.heroes:
+		# 	if hero.name == fired_hero:
+		# 		self.heroes.pop(self.heroes.index(hero))		
+		# 	else:
+		# 		return 0
 
 	def view_all_heroes(self):
 		for hero in self.heroes:
