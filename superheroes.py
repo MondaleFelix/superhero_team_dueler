@@ -31,11 +31,11 @@ class Hero:
 		self.deaths = 0
 		self.kills = 0
 
-	def add_kills(self, num_kills)
+	def add_kills(self, num_kills):
 		self.kills += num_kills
 
 
-	def add_deaths(self, num_deaths)
+	def add_deaths(self, num_deaths):
 		self.deaths += num_deaths
 
 		
@@ -52,11 +52,11 @@ class Hero:
 	def add_armor(self, armor):
 		self.armors.append(armor)
 
-	def defend(self, incoming_damage):
+	def defend(self, incoming_damage = 0):
 		block_amount = 0
 		for armor in self.armors:
 			block_amount += armor.block()
-		return incoming_damage - block_amount
+		return block_amount - incoming_damage
 
 	def take_damage(self, damage):
 		self.current_health = self.current_health - self.defend(damage)
@@ -103,25 +103,43 @@ class Team:
 		for hero in self.heroes:
 			print(hero.name)		
 
+	def is_all_dead(self):
+		all_dead = False
+
+		for hero in self.heroes:
+			if hero.is_alive():
+				all_dead = True
+
+		return all_dead
+
+	def get_random_hero(self):
+		return self.heroes[random.randint(0, len(self.heroes) - 1)]
+
 	def attack(self, other_team):
 	    ''' Battle each team against each other.'''
-		our_random_hero = self.heros[random.randint(0, len(self.heroes))]	    
-		other_teams_hero = other_team[random.randint(0, len(other_team.heroes))]
-
-		while =
-
-
 	    # TODO: Randomly select a living hero from each team and have
+
+	    while self.is_all_dead() and other_team.is_all_dead():
+
+	    	our_random_hero = self.get_random_hero()
+	    	other_teams_hero = other_team.get_random_hero()
+
+	    	if our_random_hero.is_alive() or other_teams_hero.is_alive():
+	    		our_random_hero.fight(other_teams_hero)
+	    	else:
+		    	our_random_hero = self.get_random_hero()
+		    	other_teams_hero = other_team.get_random_hero()
+
+
 	    # them fight until one or both teams have no surviving heroes.
 	    # Hint: Use the fight method in the Hero class.
-	    pass
+
 
 	def revive_heroes(self, health=100):
 	    ''' Reset all heroes health to starting_health'''
 	    for hero in self.heroes:
 	    	hero.current_health = hero.starting_health
-	    # TODO: This method should reset all heroes health to their
-	    # original starting value.
+
 
 	def stats(self):
 	    '''Print team statistics'''
@@ -129,3 +147,8 @@ class Team:
 	    	print(hero.name + "has a KD of " + hero.kills + "/" + hero.deaths)
 
 if __name__ == "__main__":
+    armor = Hero("The Ring", 200)
+    for _ in range(0, 500):
+        defense = armor.defend()
+        assert (defense <= 200 and defense >= 0)
+
