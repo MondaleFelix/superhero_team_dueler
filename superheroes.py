@@ -78,6 +78,15 @@ class Hero:
 			self.add_deaths(1)
 			opponent.add_kills(1)
 
+	def add_weapon(self, weapon):
+	    '''Add weapon to self.abilities'''
+	    self.add_ability(weapon)
+	    # TODO: This method will append the weapon object passed in as an
+	    # argument to self.abilities.
+	    # This means that self.abilities will be a list of
+	    # abilities and weapons.
+
+
 # class Weapon will inherit from class Ability
 class Weapon(Ability):
 	def attack(self):
@@ -145,6 +154,65 @@ class Team:
 	    '''Print team statistics'''
 	    for hero in self.heroes:
 	    	print(hero.name + "has a KD of " + hero.kills + "/" + hero.deaths)
+
+
+class Arena:
+	def __init__(self):
+		team_one = None
+		team_two = None 
+
+	def create_ability(self):
+		ability_name = input("Ability name: ")
+		ability_damage = input("Ability damage: ")
+		return Ability(ability_name, ability_damage)
+
+	def create_weapon(self):
+		weapon_name = input("Weapon name: ")
+		weapon_damage = input("Weapon name: ")
+		return Weapon(weapon_name, weapon_damage)
+
+	def create_armor(self):
+		armor_name = input("Armor name: ")
+		armor_amount = input("Armor block amount: ")
+		return Armor(armor_name, armor_amount)
+
+	def create_hero(self):
+		hero_name = input("Hero name: ")
+		hero_health = input("Hero starting health: ")
+		return Hero(hero_name, hero_health)
+
+	def build_team_one(self):
+	'''Prompt the user to build team_one '''
+		team_name = input("Enter a team name: ")
+		num_of_heroes = input("Enter a number of heroes: ")
+
+		self.team_one = Team(team_name)
+
+		for i in range(num_of_heroes):
+			self.team_one.add_hero(self.create_hero)
+
+
+
+	def build_team_two(self):
+		team_name = input("Enter a team name: ")
+		num_of_heroes = input("Enter a number of heroes: ")
+
+		self.team_two = Team(team_name)
+
+		for i in range(num_of_heroes):
+			self.team_two.add_hero(self.create_hero)
+
+
+    def team_battle(self):
+        '''Battle team_one and team_two together.'''
+        # TODO: This method should battle the teams together.
+        # Call the attack method that exists in your team objects
+        # for that battle functionality.
+
+        self.team_one.attack(self.team_two)
+
+
+
 
 if __name__ == "__main__":
     armor = Hero("The Ring", 200)
