@@ -81,10 +81,6 @@ class Hero:
 	def add_weapon(self, weapon):
 	    '''Add weapon to self.abilities'''
 	    self.add_ability(weapon)
-	    # TODO: This method will append the weapon object passed in as an
-	    # argument to self.abilities.
-	    # This means that self.abilities will be a list of
-	    # abilities and weapons.
 
 
 # class Weapon will inherit from class Ability
@@ -182,9 +178,9 @@ class Arena:
 		return Hero(hero_name, hero_health)
 
 	def build_team_one(self):
-	'''Prompt the user to build team_one '''
-		team_name = input("Enter a team name: ")
-		num_of_heroes = input("Enter a number of heroes: ")
+
+		team_name = input("Enter a Team 1 name: ")
+		num_of_heroes = int(input("Enter a number of heroes: "))
 
 		self.team_one = Team(team_name)
 
@@ -194,8 +190,8 @@ class Arena:
 
 
 	def build_team_two(self):
-		team_name = input("Enter a team name: ")
-		num_of_heroes = input("Enter a number of heroes: ")
+		team_name = input("Enter a Team 2 name: ")
+		num_of_heroes = int(input("Enter a number of heroes: "))
 
 		self.team_two = Team(team_name)
 
@@ -203,20 +199,18 @@ class Arena:
 			self.team_two.add_hero(self.create_hero)
 
 
-    def team_battle(self):
-        '''Battle team_one and team_two together.'''
-        # TODO: This method should battle the teams together.
-        # Call the attack method that exists in your team objects
-        # for that battle functionality.
-
-        self.team_one.attack(self.team_two)
+	def team_battle(self):
+		self.team_one.attack(self.team_two)
 
 
 
+    def show_stats(self):
+    	pass
 
 if __name__ == "__main__":
-    armor = Hero("The Ring", 200)
-    for _ in range(0, 500):
-        defense = armor.defend()
-        assert (defense <= 200 and defense >= 0)
+	arena = Arena()
+	arena.build_team_one()
+	arena.build_team_two()
+	arena.team_battle()
+	arena.show_stats()
 
