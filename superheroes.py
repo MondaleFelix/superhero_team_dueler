@@ -27,7 +27,7 @@ class Hero:
 		self.starting_health = starting_health
 		self.abilities = []
 		self.armors = []
-		self.current_health = starting_health
+		self.current_health = int(starting_health)
 		self.deaths = 0
 		self.kills = 0
 
@@ -44,7 +44,7 @@ class Hero:
 		self.abilities.append(ability)
 
 	def attack(self):
-		attack_total = 0
+		attack_total = random.randint(0,9)
 		for ability in self.abilities:
 			attack_total += ability.attack()
 		return attack_total
@@ -62,12 +62,12 @@ class Hero:
 		self.current_health = self.current_health - self.defend(damage)
 
 	def is_alive(self):
-		return self.current_health > 0
+		return int(self.current_health) > 0
 
 	def fight(self, opponent):
 		while self.is_alive() and opponent.is_alive():
-			opponent.current_health -= self.attack()
-			self.current_health -= opponent.attack()
+			opponent.current_health -= int(self.attack())
+			self.current_health -= int(opponent.attack())
 
 		if self.is_alive():
 			print(self.name + " won")
@@ -103,6 +103,13 @@ class Team:
 			self.heroes.remove(hero)
 		return 0
 		
+	def get_alive_heroes(self):
+		alive_heroes = []
+		for hero in self.heroes:
+			if hero.is_alive():
+				alive_heroes.append(hero)
+
+		return alive_heroes
 
 	def view_all_heroes(self):
 		for hero in self.heroes:
@@ -151,6 +158,15 @@ class Team:
 	    for hero in self.heroes:
 	    	print(hero.name + "has a KD of " + hero.kills + "/" + hero.deaths)
 
+	def get_average_kd(self):
+		kills = 0
+		deaths = 0
+		for hero in self.heroes:
+			kills += hero.kills
+			deaths += hero.deaths
+		if deaths == 0:
+			return kills
+		return kills / deaths
 
 class Arena:
 	def __init__(self):
@@ -185,7 +201,7 @@ class Arena:
 		self.team_one = Team(team_name)
 
 		for i in range(num_of_heroes):
-			self.team_one.add_hero(self.create_hero)
+			self.team_one.add_hero(self.create_hero())
 
 
 
@@ -196,7 +212,7 @@ class Arena:
 		self.team_two = Team(team_name)
 
 		for i in range(num_of_heroes):
-			self.team_two.add_hero(self.create_hero)
+			self.team_two.add_hero(self.create_hero())
 
 
 	def team_battle(self):
@@ -204,13 +220,42 @@ class Arena:
 
 
 
-    def show_stats(self):
-    	pass
+	def show_stats(self):
+
+		if self.team_one.is_all_dead():
+			print(self.team_one.name + " is the winner!")
+			print("The teams average KD was " + str(self.team_one.get_average_kd()))
+			for hero in self.team_one.get_alive_heroes():
+				print(hero.name)
+		else:
+			self.team_two.name + " is the winner!"
+			print("The teams average KD was " + str(self.team_two.get_average_kd()))
+			for hero in self.team_two.get_alive_heroes():
+				print(hero.name)
+
+
 
 if __name__ == "__main__":
-	arena = Arena()
-	arena.build_team_one()
-	arena.build_team_two()
-	arena.team_battle()
-	arena.show_stats()
+    game_is_running = True
 
+    # Instantiate Game Arena
+    arena = Arena()
+
+    #Build Teams
+    arena.build_team_one()
+    arena.build_team_two()
+
+    while game_is_running:
+
+        arena.team_battle()
+        arena.show_stats()
+        play_again = input("Play Again? Y or N: ")
+
+        #Check for Player Input
+        if play_again.lower() == "n":
+            game_is_running = False
+
+        else:
+            #Revive heroes to play again
+            arena.team_one.revive_heroes()
+            arena.team_two.revive_heroes()
