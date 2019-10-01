@@ -66,8 +66,8 @@ class Hero:
 
 	def fight(self, opponent):
 		while self.is_alive() and opponent.is_alive():
-			opponent.current_health -= int(self.attack())
-			self.current_health -= int(opponent.attack())
+			opponent.current_health -= self.attack()
+			self.current_health -= opponent.attack()
 
 		if self.is_alive():
 			print(self.name + " won")
@@ -150,7 +150,7 @@ class Team:
 	def revive_heroes(self, health=100):
 	    ''' Reset all heroes health to starting_health'''
 	    for hero in self.heroes:
-	    	hero.current_health = hero.starting_health
+	    	hero.current_health = health
 
 
 	def stats(self):
